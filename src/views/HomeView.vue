@@ -10,17 +10,11 @@
       <Subcard :infos="pokemonChain" />
     </div>
   </section>
-<!-- 
-  <div v-for="(poke, i) in renderPokemons" :key="i">
-    <Card v-bind:infos="poke" />
-  </div> -->
-  
 </template>
 
 
 <script>
 import { apiInstance } from '@/services/api';
-import axios from 'axios';
 import Card from '@/components/Card/Card.vue';
 import Subcard from '@/components/SubCard/Subcard.vue'
 
@@ -41,7 +35,7 @@ export default {
         .catch((err) => console.log(err))
         .finally(() => {
           this.getSearchEvolutions();
-        });      
+        });   
     },
     getSearchEvolutions() {
       apiInstance.get(`/pokemon-species/${this.searchPokemon}`)
@@ -51,18 +45,6 @@ export default {
     }
     
   },
-  // mounted() {
-  //   apiInstance.get("/pokemon?limit=20").then((res) => {
-  //       this.listofPokemons = res.data.results;
-  //   });
-  //   for (let i = 1; i <= 20; i++) {
-  //       this.endpoints.push(`/pokemon/${i}/`);
-  //   }
-  //   axios.all(this.endpoints.map((endpoint) => apiInstance.get(endpoint).then((res) => {
-  //     this.renderPokemons.push(res.data);
-  //     }))      
-  //   );
-  // },
   components: { Card }
 }
 
@@ -78,7 +60,6 @@ section{
   
   .input-search{
     max-width: 1266px;
-    /* height: 20px; */
 
     display: flex;
     justify-content: center;
