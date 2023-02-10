@@ -1,36 +1,35 @@
 <script>
-import { defineComponent } from 'vue';
-
-defineComponent({
-  name: "header"
-})
+export default {
+  name: "HeaderApp",
+  data() {
+    return {
+      logoPokeApi: '../../public/pokeapi_256.png'
+    }
+  }
+}
 </script>
 
 
 <template>
   <header>
-    <h3>PokeAPI - CopyBase</h3>
+    <img :src="logoPokeApi" alt="logo">
   </header>
 </template>
 
 <style lang="scss">
 header{
-  background-color: black;
-  color: #f5f5f5;
+  background-color: #f5f5f5;
   
   display: flex;
   align-items: center;
   justify-content: center;
 
-  height: 4rem;
+  height: 4.5rem;
 
-  box-shadow: 1px 2px 7px 1px rgba(0,0,0,0.5);
+  box-shadow: 1px 2px 7px 1px rgba(255, 255, 255, 0.5);
 
-  h3{
-    letter-spacing: 1.6px;
-
-    font-weight: 400;
-    font-size: 24px;
+  img {
+    width: 120px;
   }
 }
 

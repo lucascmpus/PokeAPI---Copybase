@@ -1,16 +1,15 @@
 <template>
-
   <section>
-    <label for="search">Digite o nome do pokemon</label><br>
-    <input v-model="searchPokemon" @change="getSearch" id="search" type="text">
-    {{ searchPokemon }}
+    <div class="input-search">
+      <label for="search">Digite o nome ou id do Pokemon</label><br>
+      <input v-model="searchPokemon" @change="getSearch" id="search" type="text" placeholder="Ex: Bulbasaur, 1, charmander">
+    </div>
+
+    <div v-if="!loading">
+      <Card :infos="pokemon.data" />
+      <Subcard :infos="pokemonChain" />
+    </div>
   </section>
-
-
-  <div v-if="!loading">
-    <Card v-bind:infos="pokemon.data" />
-  </div>
-
 <!-- 
   <div v-for="(poke, i) in renderPokemons" :key="i">
     <Card v-bind:infos="poke" />
@@ -22,7 +21,8 @@
 <script>
 import { apiInstance } from '@/services/api';
 import axios from 'axios';
-import Card from '../components/Card.vue';
+import Card from '@/components/Card/Card.vue';
+import Subcard from '@/components/SubCard/Subcard.vue'
 
 export default {
   name: "Home",
@@ -30,22 +30,26 @@ export default {
     return {
       searchPokemon: '',
       loading: true,
-      pokemon:[],          
-      listofPokemons: [],
-      endpoints: [],
-      renderPokemons: [],
+      pokemon: [],
+      pokemonChain: [],
     };
   },
   methods: {
     getSearch() {
-      console.log(this.searchPokemon)
       apiInstance.get(`/pokemon/${this.searchPokemon}`)
         .then((res) => { this.pokemon = res; })
         .catch((err) => console.log(err))
         .finally(() => {
-          this.loading = false
+          this.getSearchEvolutions();
         });      
-    }      
+    },
+    getSearchEvolutions() {
+      apiInstance.get(`/pokemon-species/${this.searchPokemon}`)
+        .then((res) => { this.pokemonChain = res.data.evolution_chain })
+        .catch((err) => console.log(err))
+        .finally(() => { this.loading = false; });
+    }
+    
   },
   // mounted() {
   //   apiInstance.get("/pokemon?limit=20").then((res) => {
@@ -63,4 +67,30 @@ export default {
 }
 
 </script>
+
+<style lang="scss">
+section{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+
+  padding: 15px;
+  
+  .input-search{
+    max-width: 1266px;
+    /* height: 20px; */
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    input{
+      width: 180px;
+      padding: 2px;
+      margin-top: -5px;
+    }
+  }
+}
+</style>
 
