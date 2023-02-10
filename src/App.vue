@@ -8,14 +8,14 @@ import HeaderApp from './components/HeaderApp.vue'
   <div class="app">
     <HeaderApp />
 
-
+    <RouterView />
   </div>
-  <RouterView />
 </template>
 
 <style lang="scss">
 .app{
   width: 100vw;
+  height: 100vh;  
 }
 
 </style>
