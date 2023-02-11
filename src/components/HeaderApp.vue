@@ -1,9 +1,11 @@
 <script>
+import logoPokeApi from '@/assets/pokeapilogo.png'
+
 export default {
   name: "HeaderApp",
   data() {
     return {
-      logoPokeApi: 'src/assets/pokeapilogo.png'
+      logoPoke: 'src/assets/pokeapilogo.png'
     }
   }
 }
@@ -12,7 +14,7 @@ export default {
 
 <template>
   <header>
-    <img :src="logoPokeApi" alt="logo">
+    <img v-bind:src="logoPoke" alt="logo">
   </header>
 </template>
 
