@@ -3,7 +3,7 @@ export default {
   name: "HeaderApp",
   data() {
     return {
-      logoPokeApi: '../../public/pokeapi_256.png'
+      logoPokeApi: '@/../public/pokeapi_256.png'
     }
   }
 }
