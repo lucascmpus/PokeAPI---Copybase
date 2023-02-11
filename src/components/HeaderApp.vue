@@ -5,7 +5,7 @@ export default {
   name: "HeaderApp",
   data() {
     return {
-      logoPoke: 'src/assets/pokeapilogo.png'
+      logoPoke: './src/assets/pokeapilogo.png'
     }
   }
 }
